@@ -1,0 +1,464 @@
+<?php
+
+include_once('userinfo.php');
+
+if(isset($_POST['submit']))
+    
+{    
+            $name=mysqli_real_escape_string($con,$_POST['name']);       
+            $email=mysqli_real_escape_string($con,$_POST['email']); 
+            $mobile=mysqli_real_escape_string($con,$_POST['mobile']);  
+            $comments=mysqli_real_escape_string($con,$_POST['comments']);
+            
+            $Length=strlen($name);
+            $Length1=strlen($mobile);
+
+    
+    if($Length<=2)
+    {
+
+        echo' <script>alert("Enter Valid Name with character name length more than 2:")</script>';
+    }
+    
+    else if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+    {
+        echo' <script>alert("Enter correct email:")</script>';
+    }
+    
+    else if($Length1<10)
+    {
+        echo' <script>alert("Enter Valid Number with number length more than 9:")</script>';
+    }
+     
+    
+
+
+    else (mysqli_query($con,"insert into userdata2 (Name,Email,Mobile,Comments) values('$name','$email','$mobile','$comments')"));
+    
+        {
+                    echo' <script>alert("Thanks:-)")</script>';
+        }
+    
+            
+            
+            $html="<table><tr><td>Name:</td><td>$name</td></tr>
+            <tr><td>Email:</td><td>$email</td></tr>
+            <tr><td>Mobile:</td><td>$mobile</td></tr>
+            <tr><td>Comments:</td><td>$comments</td></tr></table>
+            ";
+                
+         {
+            include('smtp/PHPMailerAutoload.php'); 
+            $mail=new PHPMailer(true); 
+            $mail->isSMTP();
+            $mail->Host="smtp.gmail.com";
+            $mail->port=587;
+            $mail->SMTPSecure="tls";
+            $mail->SMTPAuth=true;
+            $mail->Username="amitfabrication0914@gmail.com";
+            $mail->Password="Ashriya@0914";
+            $mail->SetFrom("amitfabrication0914@gmail.com");
+            $mail->addAddress("amitfabrication0914@gmail.com");
+            $mail->IsHTML(true);
+            $mail->Subject="Costomer Details:";
+            $mail->Body=$html;
+        $mail->SMTPoptions=array('ssl'=>array('verify_peer'=>false,'varify_peer_name'=>false,'allow_self_signed'=>false));
+            $mail->send();
+          
+              
+            
+        }
+           
+        }
+
+
+?>
+
+<html>
+<head>
+ <title>Amit Faricatios</title>
+<script src="https://kit.fontawesome.com/04c4726dfc.js" crossorigin="anonymous"></script>
+
+ <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"> </script>
+<link rel="stylesheet" type="text/css" href="fabrication/style.css">
+<link rel="stylesheet" type="text/css" href="fabrication/index.php">
+
+
+</head>
+<body>
+<!-------Navigation--------->
+<section id="nav-bar">
+ <nav class="navbar navbar-expand-lg navbar-light ">
+  <a class="navbar-brand" href="#"><img src="img/logo.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#about">AboutUs</a>
+           </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#services">OurServices/Designs</a>
+     
+        <li class="nav-item">
+        <a class="nav-link" href="#testimonials">testimonial</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#contact">Contact</a>
+      </li>
+      </ul>
+  </div>  
+</nav>
+</section>  
+    <!------Slider------>
+<div id="slider">
+<div id="headerSlider" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#headerSlider" data-slide-to="0" class="active"></li>
+    <li data-target="#headerSlider" data-slide-to="1" class="active"></li>
+    <li data-target="#headerSlider" data-slide-to="2" class="active"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img  class="d-block img-fluid" src="img/img1.jpg">
+        <div class="carousel-caption">
+            <h5>We are committed for quality </h5>
+        </div>
+    </div>
+    <div class="carousel-item">
+         <img  class="d-block img-fluid" src="img/img10.jpg" >
+>
+        <div class="carousel-caption">
+            <h5>Always dedication for quality fabrication</h5>
+        </div>
+    </div>
+    <div class="carousel-item">
+      <img  class="d-block img-fluid" src="img/img2.jpg">
+        <div class="carousel-caption">
+            <h5>Get fabrication with our best </h5>
+        </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#headerSlider" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#headerSlider" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+    </div>
+    </div>
+    <!-------About------>
+    <section id="about">
+    <section class="my-5">
+     <div>
+     <h1 class="text-center">About Us</h1> </div>  
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-lg-6 col-md-6 col-12">
+            <img src="img/aaa.jpg" class="img-fluid aboutimg" data-aos="fade-right">  
+          </div>  
+        <div class="col-lg-6 col-md-6 col-12">
+        <div class="about-content">
+        <h2>We Are Amit Fabrications</h2>
+            <p>We are the providers of all type of fabrication work.We also accept the large scale building construction fabrication work.We believe in providing a quality work with reasonable cotation price:-) with a best design work as per the costomer requirnment.
+          
+                <h4>Address:</h4>
+        <div>Amit Fabricatio,Near vitthal Rukmini temple,Bavdhan(budruk),Pune.411021.</div>
+        <h4>Phone-No:</h4>
+        <div>Bharat Bhosale:91-9822522395</div>
+        <div>Amit Bhosale:91-9767053190</div>
+        <h4>Email:</h4>
+        Our-Email:  Amitfabrication0914@gmail.com
+        
+<div><p><b>Get Social:</b>
+    <a href="https://www.facebook.com/amit.fabrication/" target="_blank"><i class="fa fa-facebook"></i></a>
+    
+    <a href="https://www.instagram.com/amitfabrication/" target="_blank"><i class="fa fa-instagram"></i></a>
+
+</p></div>
+ </div>
+                
+                </div>
+    </div>
+    </div>
+        
+        </section>
+    </section>
+        
+    <!----------------------Services------------------->
+    <section id="services">
+    <div class="container">
+    <section class="my-5">
+    <div class="py-5">
+      <h1>Our Services</h1>
+        <div class="contaier-fluid" pb-3>
+        <div class="row">
+         <div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/img5.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Safety Door</h5>
+   <a class="btn btn-primary" href="#contact">Know More...</a> 
+    
+  </div>
+</div>   
+</div>
+  <div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/img3.jpg" class="card-img-top" alt="...">
+  <div class="card-body" >
+    <h5 class="card-title" >Stairs Realig</h5>
+    <a class="btn btn-primary" href="#contact">Know More...</a>
+ </div>
+</div>   
+</div>
+            
+<div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/img71.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Windows</h5>
+    <a class="btn btn-primary" href="#contact">Know More...</a>
+  </div>
+</div> 
+    
+  </div>
+</div>     
+<div class="container">
+    <section class="my-5">
+    <div class="py-5">
+        <div class="contaier-fluid">
+        <div class="row">
+         <div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/bench.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Iron Bench</h5>
+    <a class="btn btn-primary" href="#contact">Know More...</a>
+  </div>
+</div>   
+</div>
+  <div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/wel.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Welding Work</h5>
+    <a class="btn btn-primary" href="#contact">Know More...</a>
+ </div>
+</div>   
+</div>
+            
+<div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/gate.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Sliding Gates</h5>
+    <a class="btn btn-primary" href="#contact">Know More...</a>
+    
+  </div>
+</div> 
+    
+  </div>   
+
+
+<div class="container">
+    <section class="my-5">
+    <div class="py-5">
+        <div class="contaier-fluid">
+        <div class="row">
+         <div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/cgate.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">collapsible gate</h5>
+    <a class="btn btn-primary" href="#contact">Know More...</a>
+    
+  </div>
+</div>   
+</div>
+  <div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/shade.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Sheds</h5>
+   <a class="btn btn-primary" href="#contact">Know More...</a> 
+ </div>
+</div>   
+</div>
+ 
+            <div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/pot.jpg" class="card-img-top" alt="...">
+  <div class="card-body" >
+    <h5 class="card-title" >Pots Stand</h5>
+    <a class="btn btn-primary" href="#contact">Know More...</a>
+ </div>
+</div>   
+</div>
+<div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/ed.jpg" class="card-img-top" alt="...">
+  <div class="card-body" >
+    <h5 class="card-title" >Iron Bunk-Bed</h5>
+      <a class="btn btn-primary" href="#contact">Know More...</a>
+  
+    
+ </div>
+</div>   
+</div>
+    <div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/iro.jpg" class="card-img-top" alt="...">
+  <div class="card-body" >
+    <h5 class="card-title" >Iron Beds</h5>
+    <a class="btn btn-primary" href="#contact">Know More...</a>
+ </div>
+</div>   
+</div>
+<div class="col-lg-4 col-md-4 col-12">
+       <div class="card" style="width: 18rem;">
+  <img src="img/fa.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Fabrication work</h5>
+    <a class="btn btn-primary" href="#contact">Know More...</a>
+    
+  </div>
+</div> 
+    
+  </div>
+</div>     
+ </div></div>
+    </section>
+        </div>
+            </div>
+        </div>
+        </div>
+    </section>
+        </div>
+        </div>
+        </div>
+    </section>
+        </div>
+    </section>
+    <!-----------------Testimonials---------------->
+    <section id="testimonials">
+    <div class="container">
+     <h1 class="text-center">Testimonials</h1>   
+    <h3 class="text-center">Hello...!Here are the owners of Amit Fabrication.</h3>
+        
+     <div class="row" >
+      <div class="col-md-4 text-center">
+        <div class="profile">
+          <img src="img/papa.jpg.jpg" class="user">
+        <blockquote>Founder and Owner of Amit Fabrication.
+        </blockquote>    
+        <h3>Bharat.V.Bhosale</h3>
+        <span>Owner</span>
+          </div>
+         </div>
+         
+          <div class="col-md-4 text-center">
+        <div class="profile">
+          <img src="img/dada.jpg" class="user">
+        <blockquote>Co-Owner of Amit Fabrication.
+        </blockquote>    
+        <h3>Amit.B.Bhosale</h3>
+        <span>Co-Owner</span>
+          </div>
+         </div>
+        </div>
+        </div>
+    </section>
+    
+        <!-----------------Contact---------------->
+    <section id="contact">
+<h1 class="text-center">Contact</h1>
+    <div class="row">
+    <div class="col-md-6">
+    
+
+   
+    <!--<div class="w-50 m-auto">-->
+       
+        <form method="post">
+      <div class="contact-form" >
+     <div class="form-group">
+         <label>Username</label> 
+        <input type="text" name="name" autocomplete="off" class="form-control" required="true">
+       <div class="form-group" >
+      <label>Email-Id</label> 
+        <input type="text" name="email" autocomplete="off" class="form-control" required="true">
+       </div>     
+        <div class="form-group" >
+      <label>Mobile</label> 
+        <input type="text" name="mobile" autocomplete="off" class="form-control" required="true">
+         </div>   
+      <div class="form-group" >
+      <label>Comments</label> 
+         <input type="text" name="comments" autocomplete="off" class="form-control" required="true">
+                </div> 
+         
+         </div> 
+    <div class="form-group" >
+   <button type="submit" name="submit" class="btn btn-success">Submit</button>
+  <p>
+      
+      
+        </p>
+       
+</div></div>
+        </form>
+    
+            </div> 
+    
+    
+        
+
+        
+<div class="col-md-6" class="contact-info">
+<label><h4 class="text-center">  Our Contact-info:</h4></label>  
+<div class="follow"> 
+    <b>Address:</b>
+<a href="#"><i class="fas fa-map-marker"></i></a>Amit Fabricatio,Near vitthal Rukmini temple,Bavdhan(budruk),Pune.411021.</div>   <div class="follow"><b>Phone-No:</b> 
+<a href="#"><i class="fas fa-phone"></i></a>91-9822522395.</div>    
+<div class="follow"><b>Phone-No2:</b> 
+<a href="#"><i class="fas fa-phone"></i></a>91-9767053190.</div> 
+ <div class="follow"><b>Our-Email:</b>
+<a href="https://www.gmail.com/"><i class="fas fa-envelope"></i></a>
+Amitfabrication0914@gmail.com</div>  
+<div class="follow">
+    <b>Get Social:</b>
+    <div class="certerdiv">
+    <a href="https://www.instagram.com/amitfabrication/" target="_blank">
+    <i class="fa fa-instagram"></i></a>
+    
+    
+    <a href="https://www.facebook.com/amit.fabrication/" target="_blank"><i class="fa fa-facebook"></i></a>
+    
+</div>             
+</div>
+</div>
+        </div> 
+    </section>
+
+
+
+    <!-----------------------Footer---------------------->
+    <footer>
+    <p class="p-3 bg-dark text-white text-center">!Copyrights!supriyagavali123@gmail.com</p>
+     </footer>
+
+    </body>
+</html>
