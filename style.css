@@ -19,20 +19,22 @@
 
 .navbar-brand img
 {
-    height: 50px;
-    padding-left: 30px;
+    height: 600px;
+    padding-left: 20px;
 }
 
 .navbar-nav
 {
-    padding: 0 10px;
+    padding: 0 5px;
     
 }
+
 
 
 .navbar-nav li a
 {
     float: right;
+    font-weight: 600;
     text-align: left;
     
 }
@@ -48,13 +50,14 @@
 .navbar-toggler
 {
     border: none!important;
+
 }
 
 .nav-link
 {
     color: #555!important;
     font-weight: 600;
-    font-size: 30px;
+    font-size: 25px;
 }
 /*------About-----*/
 #about
@@ -64,11 +67,13 @@
     width: 100%
     
 }
+
+
 .text-center
 {
     text-align: end;
 }
-#About h2
+#about h2
 {
     text-align: center;
     color: black!important;
